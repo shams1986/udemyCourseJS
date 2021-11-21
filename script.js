@@ -1,6 +1,6 @@
 "use strict";
 
-const numberOfFilms = +prompt("wieviel filmen hast du angesehen ?","");
+const numberOfFilms = prompt("wieviel filmen hast du angesehen ?","");
 
 const personalMovieDB = {
     count: numberOfFilms,
@@ -21,6 +21,7 @@ personalMovieDB.movie[a] = b;
 personalMovieDB.movie[c] = d;
 
 console.log(personalMovieDB);
+
 
 
 
