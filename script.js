@@ -49,7 +49,7 @@ function rememberFilms(){
 
     while(count < 2){
 
-         const a = prompt("Eine zu letzt gesegene film ?",""),
+         const a = prompt("Eine zu letzt gesehene film ?",""),
          b = prompt("bewerte diese film");
 
         if(a != null && b != null && a.length <= 50 &&
@@ -63,7 +63,7 @@ function rememberFilms(){
         }
     }
 
-    console.log(personalMovieDB);
+
 }
 
 rememberFilms();
@@ -86,10 +86,15 @@ function writeYourGenres(){
 writeYourGenres();
 
 
+function learJS(lang, callback){
+    console.log(`ya uchu ${lang}`);
+    callback();
+}
 
 
-
-
+function done('JavaScript', function(){
+    console.log('ya proshol etot urok');
+});
 
 
 
