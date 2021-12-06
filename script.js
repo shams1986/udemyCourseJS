@@ -86,19 +86,13 @@ function writeYourGenres(){
 writeYourGenres();
 
 
-function learJS(lang, callback){
+function learnJS(lang, callback){
     console.log(`ya uchu ${lang}`);
     callback();
 }
 
 
-function done('JavaScript', function(){
+ learnJS('JavaScript', function(){
     console.log('ya proshol etot urok');
 });
-
-
-
-
-
-
 
