@@ -2,83 +2,116 @@
 
 
 
-let numberOfFilms;
-
-function start() {
-    numberOfFilms = +prompt("wieviel filmen hast du angesehen ?", "");
-}
-
-start();
 
 const personalMovieDB = {
-    count: numberOfFilms,
+    count: 0,
     movie: {},
     actors: {},
     genres: [],
-    private: false
+    private: false,
+
+    start: function () {
+        personalMovieDB.count = +prompt("wieviel filmen hast du angesehen ?", "");
+
+        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
+            personalMovieDB.count = +prompt("wieviel filmen hast du angesehen ?", "");
+        }
+    },
+
+    detectPersonalLevel: function () {
+        if (personalMovieDB.count < 10) {
+            console.log('prosmotrenno dovolno malo filmov');
+
+        } else if (personalMovieDB.count > 10 && personalMovieDB.count < 30) {
+            console.log('vi klassicheskiy zritel');
+
+        } else if (personalMovieDB.count > 30) {
+            console.log('vi kinoman');
+
+        } else {
+            console.log('proizoshla oshibka');
+        }
+    },
+
+    rememberFilms: function () {
+        let count = 0;
+
+        while (count < 2) {
+
+            const a = prompt("Eine zu letzt gesehene film ?", ""),
+                b = prompt("bewerte diese film");
+
+            if (a != null && b != null && a.length <= 50 &&
+                b.length <= 50 && a != "" && b != "") {
+
+                personalMovieDB.movie[a] = b;
+                count++;
+                console.log('done');
+            } else {
+                console.log('error');
+            }
+        }
+    },
+
+    toggleVisibleMyDB: function () {
+        personalMovieDB.private = personalMovieDB.private ? false : true;
+    },
+
+
+    showMyDB: function (hidden) {
+        if (hidden) {
+            console.log(personalMovieDB);
+        }
+    },
+
+    writeYourGenres: function () {
+        let i = 1;
+        // for (; i <= 3;) {
+        //     let genre = prompt(`was ist deine lieblings Gegnre ? ${i}`);
+        //     if (genre == null || genre == '') {
+        //         console.log('incorect input!');
+        //         continue;
+        //     }
+
+        //     personalMovieDB.genres[i - 1] = genre;
+        //     i++;
+        // }
+
+        for (; i <= 1;) {
+            let genres = prompt('please input your fovorite genres through comma').toLowerCase();
+
+            if (genres == null || genres == '') {
+                console.log('incorect input!');
+                continue;
+            }
+            personalMovieDB.genres = genres.split(', ');
+            personalMovieDB.genres.sort();
+            i++;
+        }
+
+        personalMovieDB.genres.forEach((item, i) => {
+            console.log(`Lieblings Genre ${i+1} ist - ${item}`);
+        });
+    }
+
 
 };
 
-function detectPersonalLevel() {
 
-    if (personalMovieDB.count < 10) {
-        console.log('prosmotrenno dovolno malo filmov');
+personalMovieDB.start();
 
-    } else if (personalMovieDB.count > 10 && personalMovieDB.count < 30) {
-        console.log('vi klassicheskiy zritel');
+personalMovieDB.detectPersonalLevel();
 
-    } else if (personalMovieDB.count > 30) {
-        console.log('vi kinoman');
-
-    } else {
-        console.log('proizoshla oshibka');
-    }
-
-}
-
-detectPersonalLevel();
+personalMovieDB.rememberFilms();
 
 
+personalMovieDB.toggleVisibleMyDB();
 
-function rememberFilms() {
-    let count = 0;
+personalMovieDB.showMyDB(personalMovieDB.private);
 
-    while (count < 2) {
-        const a = prompt("Eine zu letzt gesehene film ?", ""),
-            b = prompt("bewerte diese film");
-
-        if (a != null && b != null && a.length <= 50 &&
-            b.length <= 50 && a != "" && b != "") {
-
-            personalMovieDB.movie[a] = b;
-            count++;
-            console.log('done');
-        } else {
-            console.log('error');
-        }
-    }
+personalMovieDB.writeYourGenres();
 
 
-}
-
-rememberFilms();
-
-function showMyDB(hidden) {
-    if (!hidden) {
-        console.log(personalMovieDB);
-    }
-}
-
-showMyDB(personalMovieDB.private);
-
-
-function writeYourGenres() {
-    for (let i = 1; i <= 3; i++) {
-        personalMovieDB.genres[i - 1] = prompt(`Ihre Lieblings Genre ${i} ?`);
-    }
-}
-
-writeYourGenres();
 
 /*
 function learnJS(lang, callback) {
